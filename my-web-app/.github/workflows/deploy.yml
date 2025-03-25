@@ -1,0 +1,61 @@
+name: Deploy to Environments
+
+on:
+  push:
+    branches:
+      - main # Or your main branch name
+
+jobs:
+  deploy_dev:
+    runs-on: ubuntu-latest
+    environment:
+      name: development
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set Environment variable
+        run: echo "ENVIRONMENT=development" >> $GITHUB_ENV
+      - name: Deploy to development
+        run: |
+          echo "Deploying to development environment..."
+          echo "Simulating deployment: Copying files to dev server"
+          echo "Environment variable: $ENVIRONMENT"
+          # Simulate deployment steps (e.g., rsync, scp)
+          # In a real scenario you would deploy to a dev server.
+
+  deploy_staging:
+    runs-on: ubuntu-latest
+    needs: deploy_dev
+    environment:
+      name: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set Environment variable
+        run: echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to staging environment..."
+          echo "Simulating deployment: Copying files to staging server"
+          echo "Environment variable: $ENVIRONMENT"
+          # Simulate deployment steps (e.g., rsync, scp)
+          # In a real scenario you would deploy to a staging server.
+
+  deploy_production:
+    runs-on: ubuntu-latest
+    needs: deploy_staging
+    environment:
+      name: production
+      url: https://your-production-app.com #Replace with your production url.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set Environment variable
+        run: echo "ENVIRONMENT=production" >> $GITHUB_ENV
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production environment..."
+          echo "Simulating deployment: Copying files to production server"
+          echo "Environment variable: $ENVIRONMENT"
+          # Simulate deployment steps (e.g., rsync, scp)
+          # In a real scenario you would deploy to a production server.
