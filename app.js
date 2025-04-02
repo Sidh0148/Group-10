@@ -6,7 +6,7 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World from environment: ' + process.env.ENVIRONMENT);
+  res.end('say hey to environment: ' + process.env.ENVIRONMENT);
 });
 
 server.listen(port, hostname, () => {
